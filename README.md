@@ -1,2 +1,35 @@
 # shopware-pwa-datalayer
-Add commerce events to the datalayer for Shopware PWA
+Nuxt plugin for Shopware PWA that logs commerce events to the datalayer.
+
+## Installation
+Add Google Tag Manager to your Shopware PWA instance. For example via the [@nuxtjs/gtm module](https://www.npmjs.com/package/@nuxtjs/gtm)
+Instructions [here](https://shopware-pwa-docs.vuestorefront.io/landing/cookbook/#_7-how-to-install-and-register-a-nuxt-plugin).
+
+Download or clone the shopware-pwa-gtm-events plugin.
+Place the plugin in a suitable directory. For example in your custom theme, or in `src/plugins`
+
+Install lodash module via yarn or nmp `yarn add lodash` / `npm add lodash`
+
+Enable the plugin in `nuxt,config.js`
+For example when installed  in `src/plugins`
+
+```
+...
+  plugins: [
+    '~plugins/shopware-pwa-datalayer/'
+  ],
+...
+```
+## 
+
+## Supported events
+
+For now the following events are implemented:
+
+- Product detail view;
+- Product list view;
+- Add to cart;
+- Remove from cart;
+- View cart;
+- Start checkout;
+- Purchase event (partially);

@@ -1,0 +1,25 @@
+{
+  "name": "shopware-pwa-gtm-events",
+  "version": "0.1.0",
+  "description": "Log GTM events for Shopware PWA",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/K3vinF/shopware-pwa-datalayer.git"
+  },
+  "keywords": [
+    "shopware-pwa",
+    "gtm",
+    "google-tag-manager",
+    "analytics"
+  ],
+  "author": "K.Franke",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/K3vinF/shopware-pwa-datalayer/issues"
+  },
+  "homepage": "https://github.com/K3vinF/shopware-pwa-datalayer#readme"
+}
