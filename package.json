@@ -16,6 +16,9 @@
     "type": "git",
     "url": "git+https://github.com/K3vinF/shopware-pwa-datalayer.git"
   },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
   "license": "GPL-3.0",
   "author": "K.Franke",
   "main": "./lib/index.js",
