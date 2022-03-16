@@ -7,20 +7,8 @@ Instructions [here](https://shopware-pwa-docs.vuestorefront.io/landing/cookbook/
 
 Download or clone the shopware-pwa-gtm-events plugin.
 Place the plugin in a suitable directory. For example in your custom theme, or in `src/plugins`
+There Shopware PWA will automaticly detect and enable it.
 
-Install lodash module via yarn or nmp `yarn add lodash` / `npm add lodash`
-
-Enable the plugin in `nuxt,config.js`
-For example when installed  in `src/plugins`
-
-```
-...
-  plugins: [
-    '~plugins/shopware-pwa-datalayer/'
-  ],
-...
-```
-## 
 
 ## Supported events
 
