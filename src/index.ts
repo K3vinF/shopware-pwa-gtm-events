@@ -15,21 +15,22 @@ import {
   logProductView, logPurchase,
   logRemoveFromCart, logUpQuantityInCart
 } from "./datalayer-utils";
-import { filter } from "lodash";
+
 import { effectScope } from "vue-demi";
 
-export default async ( context ) => {
-  const { app, route } = context;
+export default async ( { app, route } ) => {
+
   // https://github.com/vuestorefront/shopware-pwa/discussions/1667#discussioncomment-1586983
   const scope = effectScope();
   extendScopeContext(scope, app);
 
+  // @ts-ignore process not found
   if ( process.client ) {
     await scope.run(async () => {
 
       const { on, broadcast } = useIntercept();
       const currency = useCurrency();
-      let prevCart = undefined;
+      let prevCart: any = undefined;
       const { cart } = useCart();
       const { page } = useCms();
       const { isOpen: sidebarCartOpen } = useUIState({
@@ -68,7 +69,11 @@ export default async ( context ) => {
       const cartWatcher = debounce ( (cart) => {
         if (prevCart)
           prevCart.lineItems.forEach(function (lineItem, i) {
-            const newLineItems = filter(cart.lineItems, {'id': lineItem.id });
+            // const newLineItems = filter(cart.lineItems, {'id': lineItem.id });
+            const newLineItems = cart.lineItems.filter( (item: any) => {
+                return item['id'] == lineItem.id
+              })
+
             if (newLineItems.length && lineItem.quantity !== newLineItems[0].quantity) {
               const difference = newLineItems[0].quantity - lineItem.quantity;
               broadcast('lineItemQuantityChange', { lineItem, quantity: difference });
@@ -90,7 +95,6 @@ export default async ( context ) => {
         broadcastKey: INTERCEPTOR_KEYS.ADD_TO_CART,
         name: "addToCartListener",
         handler: ({ product }) => {
-            console.log('event listener from nuxt!!!', product);
           logAddToCart(product, currency);
           }
       });
@@ -131,7 +135,6 @@ export default async ( context ) => {
         broadcastKey: 'removeFromCart',
         name: "removeFromCartListener",
         handler: ( product ) => {
-          console.log('Remove from cart', product);
           logRemoveFromCart(product, currency);
         }
       });
@@ -148,16 +151,12 @@ export default async ( context ) => {
         broadcastKey: 'lineItemQuantityChange',
         name: "lineItemListener",
         handler: (e) => {
-          console.log('quantity changed', e);
           const difference = e.quantity;
           const lineItem = e.lineItem;
           if (difference < 0) {
-            console.log('item quantity lowered', lineItem, -difference );
             logRemoveFromCart(lineItem, currency.currency.value.isoCode, -difference);
           }
           else {
-            console.log('item quantity upped', lineItem, difference );
-            debugger
             logUpQuantityInCart(lineItem, currency.currency.value.isoCode, difference)
           }
         }
