@@ -1,5 +1,5 @@
 # shopware-pwa-datalayer
-Nuxt plugin for Shopware PWA that logs commerce events to the datalayer.
+Nuxt plugin for Shopware PWA that logs ecommerce events to the dataLayer according to the Google Analytics 4 schema.
 
 ## Installation
 Add Google Tag Manager to your Shopware PWA instance. For example via the [@nuxtjs/gtm module](https://www.npmjs.com/package/@nuxtjs/gtm)
